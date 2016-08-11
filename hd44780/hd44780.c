@@ -1,3 +1,12 @@
+/*	HD44780 lCD controler driver
+ *	@author CAJI0
+ *	
+ *
+ *
+ *
+ *
+ */
+
 #include "hd44780.h"
 
 /* Commands*/
@@ -124,7 +133,7 @@ void Enable_Strobe(void)
 /* Send data to HD44780 controller*/
 void HD44780_Send_Data(uint8_t data){
   RS_SET;
-	
+
 	/* set high nibble */
   HD44780_Set_Data((data >> 4));
 	/* set low nibble */
@@ -134,7 +143,7 @@ void HD44780_Send_Data(uint8_t data){
 /* Send command to HD44780 controler */
 void HD44780_Send_Command(uint8_t data){
   RS_RESET;
-	
+
 	/* set high nibble */
   HD44780_Set_Data((data >> 4));
 	/* set low nibble */
@@ -160,7 +169,7 @@ void HD44780_Init (void){
   /* third time function set */
   HD44780_Set_Data(0x03);
 	User_Delay_us(4500);
-	
+
   /* Set 4 bit interface mode */
 	HD44780_Set_Data(0x02);
 	User_Delay_us(100);
@@ -169,15 +178,15 @@ void HD44780_Init (void){
   HD44780_Opts.HD44780_Function = HD44780_4BITMODE | HD44780_5x8DOTS | HD44780_2LINE;
 	HD44780_Send_Command(HD44780_FUNCTIONSET | HD44780_Opts.HD44780_Function);
 
-	
+
   /* Display on, cursor off, blinking off */
   HD44780_Opts.HD44780_Control = HD44780_DISPLAY_ON;
   HD44780_Send_Command(HD44780_DISPLAYCONTROL | HD44780_Opts.HD44780_Control);
-	
+
 	HD44780_Display_Clear();
 
   /* Entry mode set:  */
-	HD44780_Opts.HD44780_Mode = HD44780_ENTRYLEFT | HD44780_ENTRYSHIFTDECREMENT; 
+	HD44780_Opts.HD44780_Mode = HD44780_ENTRYLEFT | HD44780_ENTRYSHIFTDECREMENT;
 	HD44780_Send_Command(HD44780_ENTRYMODESET | HD44780_Opts.HD44780_Mode);
 
 	HD44780_Send_Command(HD44780_RETURN_HOME);
