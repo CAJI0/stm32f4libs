@@ -1,6 +1,6 @@
 /*	HD44780 lCD controler driver
  *	@author CAJI0
- *	
+ *	@ide Keil uVision 5
  *
  *
  *
